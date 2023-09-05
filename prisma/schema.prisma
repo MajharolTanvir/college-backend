@@ -11,7 +11,54 @@ datasource db {
 }
 
 model User {
+  id       String    @id @default(uuid())
+  email    String    @unique
+  password String
+  role     RoleModel @default(USER)
+
+  @@map("users")
+}
+
+enum RoleModel {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+model Profile {
+  userId    String
+  firstName String
+  lastName  String
+  profile   String
+  contactNo String
+  country   String
+  location  String
+
+  @@id([userId])
+  @@map("profiles")
+}
+
+model About {
+  id          String @id @default(uuid())
+  imageUrl    String
+  description String
+  resume      String
+
+  @@map("abouts")
+}
+
+model ScooreBoard {
+  id        String @id @default(uuid())
+  title     String
+  countDown String
+  prefix    String
+
+  @@map("scoorsBoard")
+}
+
+model Categories {
   id    String @id @default(uuid())
-  email String @unique
-  name  String
+  title String
+
+  @@map("categtories")
 }
